@@ -5,7 +5,7 @@ import { getShifts, createShift, updateShift, deleteShift } from '@/lib/actions/
 import { getEmployees } from '@/lib/actions/employees.actions'
 import { getDepartments, getStores } from '@/lib/actions/settings.actions'
 import type { AppSession, ScheduleEvent, Profile, Department, Store, ShiftStatus } from '@/types'
-import { hasRole } from '@/lib/auth'
+import { hasRole } from '@/lib/roles'
 
 const DAYS_ES = ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado']
 const STATUS_OPTIONS: ShiftStatus[] = ['activo', 'pendiente', 'completado', 'cancelado']

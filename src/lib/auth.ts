@@ -1,20 +1,12 @@
-import { createClient } from './supabase/client'
+import { createServerSupabaseClient } from './supabase/server'
 import type { AppSession, Profile, Company } from '@/types'
+import { hasRole } from './roles'
 
-export const ROLE_RANK: Record<string, number> = {
-  employee: 1,
-  manager: 2,
-  admin: 3,
-  owner: 4,
-}
-
-export function hasRole(userRole: string, required: string): boolean {
-  return (ROLE_RANK[userRole] ?? 0) >= (ROLE_RANK[required] ?? 99)
-}
+export { hasRole, ROLE_RANK } from './roles'
 
 export async function getSession(): Promise<AppSession | null> {
   try {
-    const supabase = createClient()
+    const supabase = createServerSupabaseClient()
 
     const {
       data: { user },
@@ -51,11 +43,7 @@ export async function getSession(): Promise<AppSession | null> {
 
 export async function requireSession(): Promise<AppSession> {
   const session = await getSession()
-
-  if (!session) {
-    throw new Error('No autenticado')
-  }
-
+  if (!session) throw new Error('No autenticado')
   return session
 }
 
