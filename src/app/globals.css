@@ -1,0 +1,15 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { height: 100%; background: #0a0d14; color: #f1f5f9; font-family: 'Segoe UI', system-ui, sans-serif; }
+
+::-webkit-scrollbar { width: 5px; height: 5px; }
+::-webkit-scrollbar-track { background: #111827; }
+::-webkit-scrollbar-thumb { background: #1e2d45; border-radius: 4px; }
+::-webkit-scrollbar-thumb:hover { background: #3b82f6; }
+
+select option { background: #111827; color: #f1f5f9; }
+input[type="time"]::-webkit-calendar-picker-indicator { filter: invert(1); opacity: .5; }
+input[type="date"]::-webkit-calendar-picker-indicator { filter: invert(1); opacity: .5; }
