@@ -1,6 +1,6 @@
 'use server'
 import { createServerSupabaseClient } from '../supabase/server'
-import { requireRole, requireSession } from '../auth'
+import { requireRole, requireSession } from '../session'
 import { revalidatePath } from 'next/cache'
 
 export async function getRequests() {

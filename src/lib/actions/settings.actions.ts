@@ -1,6 +1,6 @@
 'use server'
 import { createServerSupabaseClient } from '../supabase/server'
-import { requireRole } from '../auth'
+import { requireRole } from '../session'
 import { revalidatePath } from 'next/cache'
 
 export async function updateCompany(payload: { name: string }) {

@@ -1,6 +1,6 @@
 'use server'
 import { createServerSupabaseClient } from '../supabase/server'
-import { requireSession } from '../auth'
+import { requireSession } from '../session'
 import { revalidatePath } from 'next/cache'
 
 export async function getConversations() {

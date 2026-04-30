@@ -1,7 +1,7 @@
 'use server'
 import { createServerSupabaseClient } from '../supabase/server'
 import { createAdminClient } from '../supabase/admin'
-import { requireRole } from '../auth'
+import { requireRole } from '../session'
 import { revalidatePath } from 'next/cache'
 import type { Role } from '@/types'
 
