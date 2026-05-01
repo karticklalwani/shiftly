@@ -3,8 +3,8 @@ defmodule RealtimeWeb.ChatChannel do
 
   @impl true
   def join("chat:" <> conversation_id, payload, socket) do
-    user_id = Map.get(payload, "user_id")
-    company_id = Map.get(payload, "company_id")
+    user_id = Map.get(payload, "user_id") || socket.assigns[:user_id]
+    company_id = Map.get(payload, "company_id") || socket.assigns[:company_id]
 
     cond do
       is_nil(user_id) or user_id == "" ->
@@ -27,9 +27,10 @@ defmodule RealtimeWeb.ChatChannel do
 
         {:ok,
          %{
+           status: "joined",
            conversation_id: conversation_id,
            user_id: user_id,
-           status: "joined"
+           company_id: company_id
          }, socket}
     end
   end
@@ -100,12 +101,14 @@ defmodule RealtimeWeb.ChatChannel do
 
   @impl true
   def terminate(_reason, socket) do
-    broadcast_from(socket, "user:offline", %{
-      user_id: socket.assigns[:user_id],
-      conversation_id: socket.assigns[:conversation_id],
-      online: false,
-      at: DateTime.utc_now() |> DateTime.to_iso8601()
-    })
+    if socket.assigns[:user_id] && socket.assigns[:conversation_id] do
+      broadcast_from(socket, "user:offline", %{
+        user_id: socket.assigns.user_id,
+        conversation_id: socket.assigns.conversation_id,
+        online: false,
+        at: DateTime.utc_now() |> DateTime.to_iso8601()
+      })
+    end
 
     :ok
   end
